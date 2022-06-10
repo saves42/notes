@@ -90,4 +90,93 @@ $ ./address
 Since we declared p to be an int *, the compiler knows that *p is an int, so the right number of bytes are read.
 
 
+--binary trees--
+
+// create a tree data type
+typedef struct node
+{
+    int number;
+    struct node *left;
+    struct node *right;
+}
+node;
+
+
+// using a tree
+int main(void)
+{
+    // Tree of size 0
+    node *tree = NULL;
+  
+    // Add number to list
+    node *n = malloc(sizeof(node));
+    if (n == NULL)
+    {
+        return 1;
+    }
+    n->number = 2;
+    n->left = NULL;
+    n->right = NULL;
+    tree = n;
+
+// Add number to list
+n = malloc(sizeof(node));
+if (n == NULL)
+{
+    free_tree(tree);
+    return 1;
+}
+n->number = 1;
+n->left = NULL;
+n->right = NULL;
+tree->left = n;
+
+// Add 3rd number to list
+n = malloc(sizeof(node));
+if (n == NULL)
+{
+    free_tree(tree);
+    return 1;
+}
+n->number = 3;
+n->left = NULL;
+n->right = NULL;
+tree->right = n;
+
+// Print tree
+print_tree(tree);
+
+// Free tree
+free_tree(tree);
+return 0;
+
+//The print_tree function will start at the root node, and recursively print the tree:
+
+void print_tree(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    print_tree(root->left);
+    printf("%i\n", root->number);
+    print_tree(root->right);
+}
+
+// to free the memory for each of the nodes in our tree, we’ll have to recursively free both children first:
+
+void free_tree(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
+}
+
+
+
+
 */
